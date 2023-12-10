@@ -1,0 +1,208 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	font-family: sans-serif;
+	min-height: 100vh;
+	color: #555;
+	background-color: #ffecfc;
+	font-size: 18px;
+}
+
+h1{
+	padding: 40px 20px;
+	text-align: center;
+	background-color: #1f1919;
+	color: #ffffff;
+	font-size: 80px;
+	text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+form{
+	max-width: 400px;
+	margin: 0 auto;
+	position: relative;
+	top: 80px;
+	background-color: #ffffff;
+	padding: 25px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+	color: #333;
+	display: flex;
+	flex-direction: column;
+}
+
+form h3{
+	margin-bottom: 40px;
+	border-bottom: thin solid #d4d4d4;
+	padding-bottom: 10px;
+}
+
+form input, form textarea{
+	padding: 15px;
+	margin-bottom: 30px;
+	font-size: 18px;
+	border-radius: 10px;
+	border: thin solid #d4d4d4;
+}
+
+form label{
+	display: inline-block;
+	padding-bottom: 10px;
+	padding-left: 7px;
+}
+
+form textarea{
+	min-height: 150px;
+	padding: 10px;
+}
+
+form input[type=submit]{
+	cursor: pointer;
+	transition: color 0.3s, background-color 0.3s;
+	background-color: #f3e7fa;
+}
+
+form input[type=submit]:hover{
+	background-color: #6a507b;
+	color: #fff;
+}
+
+form input:focus,
+form textarea:focus{
+	outline: none;
+}
+
+.success{
+	color: green;
+}
+
+.error{
+	color: red;
+}
+/* I always reset all the html elements */
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	font-family: sans-serif;
+	min-height: 100vh;
+	color: #555;
+}
+
+table{
+	width:  90%;
+	margin: 30px auto;
+	text-align: center;
+}
+
+table th{
+	padding: 10px 0;
+	background-color: #f4f4f4;
+	/* background-color: #fff; */
+	border:  thin solid #d4d4d4;
+}
+
+table td{
+	padding: 10px;
+	/* border:  thin solid #d4d4d4; */
+	width: 18%;
+	text-align: center;
+	/* background-color: #fff; */
+}
+
+table img{
+	width:  70%;
+}
+
+table td.total-price{
+	font-weight: bold;
+	font-size: 22px;
+}
+table a{
+	text-decoration: none;
+	color: darkred;
+	background-color: #ffecef;
+	padding: 10px 15px;
+}
+table a:active{
+	background-color: #ccf4d6;
+	color:  green;
+}
+
+table select{
+	padding: 10px;
+	width:  200px;
+	font-size: 16px;
+	border: thin solid #d4d4d4;
+	background-color: transparent;
+}
+table select:focus{
+	outline: none;
+}
+
+table img{
+	width:  60%;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-container {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect on the container */
+}
+
+.navigation {
+    position: absolute;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    top: 0;
+    left: 0;
+}
+
+
+.navigation li {
+    margin: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    padding: 10px 20px;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s; /* Add color transition */
+}
+
+.nav-link:hover {
+    background-color: #555;
+    color: #fff; /* Change text color on hover */
+}
+/* Initially hide the logout button with specific id */
+#logout-form {
+    position: relative;
+    top: 0;
+    left: 15px;
+}
+
+#logout-form button {
+	position: fixed;
+	opacity: 0; /* Start with 0 opacity */
+	height: 0; /* Start with 0 height */
+	overflow: hidden; /* Hide overflowing content */
+	transition: opacity 0.3s ease, height 0.3s ease; /* Add a smooth transition effect */
+}
+#logout-form:hover button {
+	opacity: 1; /* Change opacity to 1 on hover */
+	color: pink;
+	height: 40px; /* Set the desired height on hover */
+}

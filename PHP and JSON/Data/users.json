@@ -1,0 +1,26 @@
+[
+    {
+        "user_id": 1,
+        "name": "Matsumoto Momonan",
+        "username": "momonan0412",
+        "password": "$2y$10$4PZfBR148LE8j0UCwC7lFekKXw70BLHbWOVzlNrOape5T1cJahvG6",
+        "email": "momonan0412@gmail.com",
+        "usertype": "admin"
+    },
+    {
+        "user_id": 2,
+        "name": "Avril Nigel Chua",
+        "username": "MomonanNoIchibanFanDesu",
+        "password": "$2y$10$oWKJAk6AAugvmEmbln1PJepRgjKq3Gy3QdpHh91LOroIoGhGUlbLe",
+        "email": "chua.avrilnigel0412@gmail.com",
+        "usertype": "user"
+    },
+    {
+        "user_id": 3,
+        "name": "Momonan Ichiban Idoru",
+        "username": "UyabNakoUwU",
+        "password": "$2y$10$ML9GQRF94ublpAW1iNRWJOX2RwT9GIUDCEhkPBnWAa09ZKYoho9kC",
+        "email": "Suki@gmail.com",
+        "usertype": "user"
+    }
+]

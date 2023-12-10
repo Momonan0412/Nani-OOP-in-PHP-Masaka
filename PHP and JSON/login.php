@@ -18,12 +18,8 @@
 	<title>Log in form</title>
 </head>
 <body>
-	
-<?php
-	include_once 'header.php';
-	?>
     <section class="container my-2">
-        <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8'); ?>" method="post" enctype="multipart/form-data" autocomplete="off">
             <div class="mb-3">
                 <h2>LOGIN</h2>
             </div>

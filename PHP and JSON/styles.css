@@ -13,7 +13,7 @@ body{
 }
 
 h1{
-	padding: 40px 20px;
+	padding: 30px 20px;
 	text-align: center;
 	background-color: #1f1919;
 	color: #ffffff;
@@ -192,8 +192,10 @@ body {
     position: relative;
     top: 0;
     left: 15px;
+	max-width: 600px; /* Adjust the maximum width as needed */
+	width: 100%;
+	margin: 0 auto; /* Center the form on the page if needed */
 }
-
 #logout-form button {
 	position: fixed;
 	opacity: 0; /* Start with 0 opacity */
@@ -205,4 +207,17 @@ body {
 	opacity: 1; /* Change opacity to 1 on hover */
 	color: pink;
 	height: 40px; /* Set the desired height on hover */
+}
+#CommentTD form{
+	top: 0px;
+}
+.comment-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.comment-container > td {
+	flex: 0 0 48%; /* Adjust the width as needed */
+	margin: 5px;
+	box-sizing: border-box;
 }

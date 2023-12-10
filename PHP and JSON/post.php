@@ -25,15 +25,15 @@
 </head>
 <body>
 
-	<h1>"Unveil the Amour: Initiating an Event with Flair"</h1>
+	<h1></h1>
     <main>
         <ul class="navigation">
-            <li><a href="account.php" class="nav-link">Home</a></li>
-            <li><a href="post.php" class="nav-link" style="color: pink;">Post An Event!</a></li>
+			<li><a href="account.php" class="nav-link" style="color: pink; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;">Home</a></li>
+			<li><a href="post.php" class="nav-link" style="color: whitesmoke; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;">Post An Event!</a></li>
         </ul>
     </main>
 	<section class="container my-2">
-		<form action="" method="POST">
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8'); ?>" method="POST">
 			<div class="mb-3">    
 				<h3 style="color: gray;">Empower Your Event</h3>
 			</div>

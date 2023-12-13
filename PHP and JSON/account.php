@@ -68,6 +68,9 @@
             if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'admin') {
                 echo "<li><a href='delete.user.php' class='nav-link' style='color: whitesmoke; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;'>Delete A User!</a></li>";
             }
+            if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer'){
+                echo "<li><a href='registrants.php' class='nav-link' style='color: whitesmoke; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;'>Registrants</a></li>";
+            }
             ?>
 		</ul>
 	</div>

@@ -85,45 +85,51 @@
     </div>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Post ID</th>
-                <th>Event Name</th>
-                <th>Registrants</th>
-                <th>Votes</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
+<table>
+    <thead>
+        <tr>
+            <th>Post ID</th>
+            <th>Event Name</th>
+            <th>Registrants</th>
+            <th>Votes</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
         <?php
-            foreach ($jsonData as $item) {
-                echo "<tr>";
-                echo "<td>{$item['post_id']}</td>";
-                echo "<td>{$item['subject']}</td>";
-                echo "<td>";
-                foreach ($item['registrants'] as $registrant) {
-                    echo "<td>{$registrant['user_id']}</td>";
-                    echo "<td>{$registrant['status']}</td>";
-                }
-                echo "</td>";
-                echo "<td>";
-                foreach ($item['votes'] as $vote) {
-                    echo "<td>{$vote['user_id']}</td>";
-                    echo "<td>{$vote['vote']}</td>";
-                }
-                echo "</td>";
-                echo "<td>
-                        <form action='' method='POST'>
-                            <input type='hidden' name='status' value='{$item['registrants']['status']}'>
-                            <button type='submit' name='submit'>Approve</button>
-                        </form>
-                    </td>";
-                echo "</tr>";
+        foreach ($jsonData as $item) {
+            echo "<tr>";
+            echo "<td>{$item['post_id']}</td>";
+            echo "<td>{$item['subject']}</td>";
+
+            // Registrants
+            echo "<td>";
+            foreach ($item['registrants'] as $registrant) {
+                echo "{$registrant['user_id']} - {$registrant['status']}<br>";
             }
-            ?>
+            echo "</td>";
+
+            // Votes
+            echo "<td>";
+            foreach ($item['votes'] as $vote) {
+                echo "{$vote['user_id']} - {$vote['vote']}<br>";
+            }
+            echo "</td>";
+
+            // Action
+            echo "<td>
+                    <form action='' method='POST'>
+                        <input type='hidden' name='status' value='{$item['registrants'][0]['status']}'>
+                        <button type='submit' name='submit'>Approve</button>
+                    </form>
+                </td>";
+
+            echo "</tr>";
+        }
         ?>
-        </tbody>
-    </table>
+    </tbody>
+</table>
+
+
 </body>
 </html>

@@ -59,6 +59,7 @@ class PostMessage{
 		if($this->subjectExist() == false){
 			array_push($this->stored_message, $this->new_message);
 			if(file_put_contents($this->storage, json_encode($this->stored_message, JSON_PRETTY_PRINT))){
+				$_SESSION['usertype'] = "organizer";
 				return $this->success = "Message Posted!";
 			} else {
 				return $this->error = "Something went wrong, please try again";

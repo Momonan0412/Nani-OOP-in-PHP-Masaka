@@ -1,0 +1,30 @@
+[
+    {
+        "post_id": "1",
+        "subject": "Yoasobi Live Tour!",
+        "registrants": {
+            "user_id": "3",
+            "status": "Pending"
+        },
+        "votes": {
+            "user_id": "3",
+            "vote": ""
+        }
+    },
+    {
+        "post_id": "2",
+        "subject": "Fan Meeting!?",
+        "registrants": [
+            {
+                "user_id": "3",
+                "status": "Pending"
+            }
+        ],
+        "votes": [
+            {
+                "user_id": "3",
+                "vote": ""
+            }
+        ]
+    }
+]

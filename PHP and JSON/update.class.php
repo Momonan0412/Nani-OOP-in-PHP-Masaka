@@ -1,17 +1,17 @@
 <?php
 class HandleJsonFile{
-    // private $commentsStorage = "./Data/comments.json";
+    private $eventsStorage = "./Data/events.json";
     private $messagesStorage = "./Data/messages.json";
     private $userStorage = "./Data/users.json";
-    private $stored_comments = array();
+    private $stored_events = array();
     private $stored_messages = array();
     private $stored_users = array();
-    // private function getCommentsData(){
-    //     if(file_exists($this->commentsStorage)){
-    //         $this->stored_comments = json_decode(file_get_contents($this->commentsStorage), true);
-    //     }
-    //     return $this->stored_comments;
-    // }
+    public function getEventsData(){
+        if(file_exists($this->eventsStorage)){
+            $this->stored_events = json_decode(file_get_contents($this->eventsStorage), true);
+        }
+        return $this->stored_events;
+    }
     public function getMessagesData(){
         if(file_exists($this->messagesStorage)){
             $this->stored_messages = json_decode(file_get_contents($this->messagesStorage), true);

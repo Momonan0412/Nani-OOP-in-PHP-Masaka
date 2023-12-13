@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap');
 .heart-btn {
-  position: relative;
+  position: absolute;
   transform: translate(-50%, -50%);
   width: 100px;
-  left: 40px;
-  bottom: 270px;
+  right: 640px;
+  bottom: 310px;
   background-color: #fbd0d8; /* Light pink background */
   border: 1px solid #f9b9c4; /* Border color */
   border-radius: 5px; /* Rounded corners */

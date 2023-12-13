@@ -1,6 +1,7 @@
 <?php
 	require("logout.class.php");
 	require("update.class.php");
+	require("event.handler.class.php");
     $update = new HandleJsonFile();
     $jsonData = $update->getMessagesData();
 ?>
@@ -16,11 +17,17 @@
         header("location: login.php");
         exit();
     }
-    if(isset($_GET['submit'])){
+    if(isset($_GET['delete'])){
 		$update->deleteMessage($_GET['userId']);
 		header("location: account.php");
 		exit();
 	}
+    if(isset($_POST['join'])){
+        // user_vote currently not handled
+        $eventHandler = new EventHandler($_POST['postID'],$_POST['subject'],$_POST['userID'], $_POST['user_vote']);
+        header("location: account.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -81,8 +88,12 @@
             if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'admin') {
                 echo '<th>Action</th>';
             }
-            if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user') {
+            if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user' ||
+                isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer') {
                 echo '<th>Action</th>';
+                // if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer'){
+                //     echo '<th>View</th>';
+                // }
             }
             ?>
         </tr>
@@ -98,13 +109,6 @@
                     </td>";
                 } elseif ($key === "image") {
                     echo "<td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);'><img style='height: 300px; width: auto; border-radius: 15px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2)' src='./Images/$value' alt=''>
-                    <div class='heart-btn'>
-                    <div class='content'>
-                    <span class='heart'></span>
-                    <span class='text'>Like</span>
-                    <span class='numb'></span>
-                    </div>
-                    </div>
                     </td>";
                 } elseif ($key === "post_id" ) {
                     echo "<td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 50px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>$value</td>";
@@ -120,44 +124,70 @@
                     <form action='' method='GET'>
                         <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
                         <input type='hidden' name='userId' value='$userId'>
-                        <button style='background-color: black;' class='btn btn-outline-light me-2' name='submit' type='submit'>Delete</button>
+                        <button style='background-color: black;' class='btn btn-outline-light me-2' name='delete' type='submit'>Delete</button>
                         </td>
                     </form>
                 ";
             }
-            if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user' && $value != "Flex.jpg") {
-                $userId = $item['user_id']; // Assuming 'user_id' is the unique identifier
+            if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user' ||
+                isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer') {
+                $postID = $item['post_id'];
+                $subject = $item['subject'];
+                $userID = $_SESSION['user_id'];
                 echo "
-                    <form action='' method='GET'>
-                        <input type='hidden' name='userId' value=''>
-                        <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'><button style='background-color: black;' class='btn btn-outline-light me-2' type='submit'>Join</button></td>
-                    </form>
-                ";
-            }elseif (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user' && $value == "Flex.jpg") {
-                $userId = $item['user_id']; // Assuming 'user_id' is the unique identifier
-                echo "
-                    <form action='' method='GET'>
-                        <input type='hidden' name='userId' value=''>
-                        <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'><button style='background-color: black;' class='btn btn-outline-light me-2' type='submit'>NOT AVAILABLE!</button></td>
-                    </form>
-                ";
+                <form action='' method='POST'>
+                <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
+                <input type='hidden' name='postID' value='$postID'>
+                <input type='hidden' name='subject' value='$subject'>
+                <input type='hidden' name='userID' value='$userID'>
+                
+                <!-- React 
+                <button class='heart-btn' type='button'>
+                <span class='content'>
+                <span class='heart'></span>
+                <span class='text'>Like</span>
+                <span class='numb'></span>
+                </span>
+                </button> <br>
+                Button -->
+                <input type='hidden' name='user_vote' value=''>
+                <!-- Join Button -->
+                <button style='background-color: black;' class='btn btn-outline-light me-2' name='join' type='submit'>Join</button>
+                </td>
+                </form>";
+                // if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer'){
+                //     echo "
+                //     <form action='registrants.php' method='POST'>
+                //     <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
+                //     <input type='hidden' name='postID' value='$postID'>
+                //     <button style='background-color: black;' class='btn btn-outline-light me-2' name='join' type='submit'>Registrants</button>
+                //     </td>
+                //     </form>";
+                // }
             }
             echo "</tr>";
         }
         ?>
     </tbody>
 </table>
-<script>
-  $(document).ready(function(){
-    $('.content').click(function(){
-      // Toggle the classes for the clicked heart
-      $(this).toggleClass("heart-active");
-      $(this).find('.text').toggleClass("heart-active");
-      $(this).find('.numb').toggleClass("heart-active");
-      $(this).find('.heart').toggleClass("heart-active");
+<?php
+echo "<script>
+$(document).ready(function(){
+    // For the 'React' button
+    $('.heart-btn').click(function(){
+        // Toggle the classes for the clicked heart
+        $(this).toggleClass('heart-active');
+        $(this).find('.text').toggleClass('heart-active');
+        $(this).find('.numb').toggleClass('heart-active');
+        $(this).find('.heart').toggleClass('heart-active');
+        
+        // Update the hidden input value based on the toggle state
+        var reactValue = $(this).hasClass('heart-active') ? '1' : '0';
+        $(this).closest('form').find('input[name=user_vote]').val(reactValue);
     });
-  });
-</script>
+});
+</script>";
+?>
 </body>
 
 </html>

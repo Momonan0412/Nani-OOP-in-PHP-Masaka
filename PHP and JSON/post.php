@@ -1,4 +1,7 @@
-<?php require("post.class.php") ?>
+<?php
+require("post.class.php");
+require("update.class.php");
+?>
 <?php
 	if(isset($_POST['submit'])){
 		$message = new PostMessage($_POST['subject'],$_POST['message'], $_POST['image']);

@@ -22,5 +22,13 @@
         "subject": "Japanese Festival!",
         "message": "Nani?",
         "image": "Festival.jpg"
+    },
+    {
+        "post_id": 4,
+        "user_id": 2,
+        "username": "test123",
+        "subject": "asd",
+        "message": "asd",
+        "image": "Anime Convention.jpeg"
     }
 ]

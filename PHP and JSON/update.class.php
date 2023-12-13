@@ -44,5 +44,11 @@ class HandleJsonFile{
         }
         file_put_contents($this->messagesStorage, json_encode($msgs, JSON_PRETTY_PRINT));
     }
+    public function approved(){
+        $events = $this->getEventsData();
+        foreach($events as $e){
+            //  TO-DO CHANGE THE STATUS
+        }
+    }
 }
 ?>

@@ -51,8 +51,8 @@
             $event_state = [
                 "post_id" => $this->postID,
                 "subject" => $this->subject,
-                "registrants" => [$registrants],
-                "votes" => [$TheVotes]
+                "registrants" => $registrants,
+                "votes" => $TheVotes
             ];
             return $event_state;
         }
@@ -73,11 +73,9 @@
 			}
         }
         private function updateEvent($index){
-            // Update registrants and votes for the existing event
             $this->eventStorage[$index]['registrants'] = $this->registrants;
             $this->eventStorage[$index]['votes'] = $this->TheVotes;
     
-            // Save the updated events to the storage file
             if(file_put_contents($this->storage, json_encode($this->eventStorage, JSON_PRETTY_PRINT))){
                 $this->success = "Event Updated!";
             } else {

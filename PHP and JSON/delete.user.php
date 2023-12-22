@@ -4,6 +4,11 @@
     $jsonData = $update->getUsersData();
 ?>
 <?php
+	session_start();
+    if(!isset($_SESSION['user'])){
+        header("location: login.php");
+        exit();
+    }
     if(isset($_GET['submit'])){
 		$update->deleteUser($_GET['userId']);
 		header("location: delete.user.php");
@@ -100,20 +105,22 @@
         <tbody>
         <?php
             foreach ($jsonData as $item) {
-                echo "<tr>";
-                echo "<td>{$item['user_id']}</td>";
-                echo "<td>{$item['name']}</td>";
-                echo "<td>{$item['username']}</td>";
-                echo "<td>{$item['password']}</td>";
-                echo "<td>{$item['email']}</td>";
-                echo "<td>{$item['usertype']}</td>";
-                echo "<td>
-                        <form action='' method='GET'>
-                            <input type='hidden' name='userId' value='{$item['user_id']}'>
-                            <button type='submit' name='submit'>Delete</button>
+                if($item['usertype'] != 'admin'){
+                        echo "<tr>";
+                        echo "<td>{$item['user_id']}</td>";
+                        echo "<td>{$item['name']}</td>";
+                        echo "<td>{$item['username']}</td>";
+                        echo "<td>{$item['password']}</td>";
+                        echo "<td>{$item['email']}</td>";
+                        echo "<td>{$item['usertype']}</td>";
+                        echo "<td>
+                        <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='GET'>
+                        <input type='hidden' name='userId' value='{$item['user_id']}'>
+                        <button type='submit' name='submit'>Delete</button>
                         </form>
-                      </td>";
-                echo "</tr>";
+                        </td>";
+                        echo "</tr>";
+                }
             }
         ?>
         </tbody>

@@ -27,10 +27,12 @@ class LoginUser{
 					$_SESSION['user'] = $this->username;
                     $_SESSION['user_id'] = $user['user_id'];
                     $_SESSION['usertype'] = $user['usertype'];
+					session_regenerate_id(true);
 					header("location: account.php"); exit();
 				}
+				return $this->error = "Invalid password. Please check your login credentials and try again.";
 			}
 		}
-		return $this->error = "Invalid Input!";
+		return $this->error = "Invalid username. Please check your login credentials and try again.";
 	}
 }

@@ -3,6 +3,11 @@ require("post.class.php");
 require("update.class.php");
 ?>
 <?php
+	session_start();
+    if(!isset($_SESSION['user'])){
+        header("location: login.php");
+        exit();
+    }
 	if(isset($_POST['submit'])){
 		$message = new PostMessage($_POST['subject'],$_POST['message'], $_POST['image']);
 		if($message->checkFieldValues()){

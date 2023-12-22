@@ -1,26 +1,10 @@
 [
     {
         "user_id": 1,
-        "name": "Avril Nigel Chua",
+        "name": "Avril Nigel M. Chua",
         "username": "momonan0412",
-        "password": "$2y$10$LDgA0EtglrALcCLQ\/HRE.OTfkYL0NaDtrmVyFwDlxjrPHtgEw4rGC",
-        "email": "chua.avrilnigel0412@gmail.com",
+        "password": "$2y$10$wkhUxrZfFMivLhRaJPmb0eDZDOeGN.QTMfSEKGNIqgH.DFf.2CNHS",
+        "email": "avrilnigel.chua@cit.edu",
         "usertype": "admin"
-    },
-    {
-        "user_id": 2,
-        "name": "User Test A. Hays",
-        "username": "test123",
-        "password": "$2y$10$X2XFPGjKIHHPDnkfSY9h..KbCkszui6vW3alKbW\/8s509RhfzJxS.",
-        "email": "tester@gmail.com",
-        "usertype": "user"
-    },
-    {
-        "user_id": 3,
-        "name": "asd",
-        "username": "asd",
-        "password": "$2y$10$fykoKA53ga\/N5jCVvZLNP.dpgBSp8azzwtg\/QMp3gy0vpMS65neXq",
-        "email": "asd@aasd",
-        "usertype": "user"
     }
 ]

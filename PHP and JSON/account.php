@@ -124,7 +124,7 @@
             if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'admin') {
                 $userId = $item['user_id']; // Assuming 'user_id' is the unique identifier
                 echo "
-                    <form action='' method='GET'>
+                    <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='GET'>
                         <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
                         <input type='hidden' name='userId' value='$userId'>
                         <button style='background-color: black;' class='btn btn-outline-light me-2' name='delete' type='submit'>Delete</button>
@@ -138,7 +138,7 @@
                 $subject = $item['subject'];
                 $userID = $_SESSION['user_id'];
                 echo "
-                <form action='' method='POST'>
+                <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
                 <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
                 <input type='hidden' name='postID' value='$postID'>
                 <input type='hidden' name='subject' value='$subject'>

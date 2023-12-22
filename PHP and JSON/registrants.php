@@ -4,6 +4,11 @@
     $jsonData = $update->getEventsData();
 ?>
 <?php
+	session_start();
+    if(!isset($_SESSION['user'])){
+        header("location: login.php");
+        exit();
+    }
     if(isset($_GET['submit'])){
         // TO BE ADD THAT CAN UPDATE PENDING REGISTRANTS
 		header("location: delete.user.php");
@@ -120,7 +125,7 @@
             // Action
             // echo $e['registrants']['status'];
             echo "<td>
-                    <form action='' method='POST'>
+                    <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
                         <input type='hidden' name='status' value='{$e['registrants']['status']}'>
                         <button type='submit' name='submit'>Approve</button>
                     </form>

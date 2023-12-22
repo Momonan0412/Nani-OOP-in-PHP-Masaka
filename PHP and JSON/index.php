@@ -1,7 +1,7 @@
 <?php require("register.class.php") ?>
 <?php
 	if(isset($_POST['submit'])){
-		$user = new RegisterUser($_POST['username'], $_POST['password'], $_POST['user_type'],  $_POST['name'], $_POST['email']);
+		$user = new RegisterUser($_POST['username'], $_POST['password'], 'user',  $_POST['name'], $_POST['email']);
 		if ($user->checkFieldValues()) {
 			// Registration successful, now redirect to login page
 			header("location: login.php");
@@ -49,15 +49,14 @@
 				<input class="form-control" type="password" name="password">
 			</div>
 			
-			<div class="mb-3">
+			<!-- <div class="mb-3">
 				<label class="form-label">User Type</label>
 				<select class="form-control" name="user_type">
 					<option value=""></option>
 					<option value="admin">Admin</option>
 					<option value="user">User</option>
-					<option value="organizer">User</option>
 				</select>
-			</div>
+			</div> -->
 			<div class="mb-3">
 				<button style="background-color: black;" class="btn btn-outline-light me-2" type="submit" name="submit">Register</button>
 				<small id="emailHelpId" class="form-text text-muted">Already have an account? <a href="login.php">Login</a> </small>

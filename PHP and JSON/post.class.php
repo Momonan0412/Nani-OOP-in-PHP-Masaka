@@ -1,4 +1,7 @@
 <?php
+	require("logout.class.php");
+?>
+<?php
 class PostMessage{
 	private $subject;
 	private $message;
@@ -7,13 +10,17 @@ class PostMessage{
 	private $user_id;
 	private $image;
 
+	private $postThis;
+
 	public $error;
 	public $success;
 	private $storage = "./Data/messages.json";
 	private $stored_message = [];
 	private $new_message;
+	
 	public function __construct($subject, $message, $image){
 		session_start();
+		$this->postThis = new HandleJsonFile();
 		$this->subject = filter_var(trim($subject), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$this->message = filter_var(trim($message), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$this->image = $image;
@@ -55,16 +62,29 @@ class PostMessage{
 		}
 		return false;
 	}
-	private function insertPost(){
-		if($this->subjectExist() == false){
+	private function insertPost() {
+		if ($this->subjectExist() == false) {
 			array_push($this->stored_message, $this->new_message);
-			if(file_put_contents($this->storage, json_encode($this->stored_message, JSON_PRETTY_PRINT))){
-				$_SESSION['usertype'] = "organizer";
+			if (file_put_contents($this->storage, json_encode($this->stored_message, JSON_PRETTY_PRINT))) {
+				$userData = & $this->postThis->getUsersData();
+				foreach ($userData as &$user) {
+					if ($user['user_id'] === $this->user_id) {
+						$user['usertype'] = 'organizer';
+						break;
+					}
+				}
+				unset($user); // Unset the reference to avoid issues later
+	
+				// Write the modified user data back to the file
+				file_put_contents($this->postThis->getUserStorage(), json_encode($userData, JSON_PRETTY_PRINT));
+	
+				$_SESSION['usertype'] = 'organizer';
 				return $this->success = "Message Posted!";
 			} else {
 				return $this->error = "Something went wrong, please try again";
 			}
 		}
 	}
+	
 }
 ?>

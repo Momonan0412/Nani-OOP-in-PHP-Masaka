@@ -87,16 +87,12 @@
             <th>Description</th>
             <th>Event Image</th>
             <?php
-            // Check if the user has 'admin' usertype
             if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'admin') {
                 echo '<th>Action</th>';
             }
             if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user' ||
                 isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer') {
                 echo '<th>Action</th>';
-                // if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer'){
-                //     echo '<th>View</th>';
-                // }
             }
             ?>
         </tr>
@@ -105,7 +101,7 @@
     <tbody id="tableBody">
         <?php
         foreach ($jsonData as $item) {
-            echo "<tr>";
+            echo "<tr style='background-color: rgb(212, 212, 212, .8)'>";
             foreach ($item as $key => $value) {
                 if ($key !== "user_id" && $key !== "image" && $key !== "post_id" && $key !== "username") {
                     echo "<td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);'>$value
@@ -144,53 +140,59 @@
                 <input type='hidden' name='subject' value='$subject'>
                 <input type='hidden' name='userID' value='$userID'>
                 
-                <!-- React 
-                <button class='heart-btn' type='button'>
-                <span class='content'>
-                <span class='heart'></span>
-                <span class='text'>Like</span>
-                <span class='numb'></span>
-                </span>
-                </button> <br>
-                Button -->
-                <input type='hidden' name='user_vote' value=''>
+                // <!-- React 
+                // Button -->
+                // <button class='heart-btn' type='button'>
+                // <span class='content'>
+                // <span class='heart'></span>
+                // <span class='text'>Like</span>
+                // <span class='numb'></span>
+                // </span>
+                // </button> <br>
+                // <input type='hidden' name='user_vote' value=''>
                 <!-- Join Button -->
                 <button style='background-color: black;' class='btn btn-outline-light me-2' name='join' type='submit'>Join</button>
                 </td>
                 </form>";
-                // if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer'){
-                //     echo "
-                //     <form action='registrants.php' method='POST'>
-                //     <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
-                //     <input type='hidden' name='postID' value='$postID'>
-                //     <button style='background-color: black;' class='btn btn-outline-light me-2' name='join' type='submit'>Registrants</button>
-                //     </td>
-                //     </form>";
-                // }
             }
             echo "</tr>";
         }
         ?>
     </tbody>
 </table>
+
 <?php
-echo "<script>
-$(document).ready(function(){
-    // For the 'React' button
-    $('.heart-btn').click(function(){
-        // Toggle the classes for the clicked heart
-        $(this).toggleClass('heart-active');
-        $(this).find('.text').toggleClass('heart-active');
-        $(this).find('.numb').toggleClass('heart-active');
-        $(this).find('.heart').toggleClass('heart-active');
+// echo "
+// <script>
+//     $(document).ready(function(){
+//         // For the 'React' button
+//         var postData = " . json_encode($update->getVotesData()) . ";
+//         var userExists = postData.user_ids.includes(" . $_SESSION['user_id'] . ");
         
-        // Update the hidden input value based on the toggle state
-        var reactValue = $(this).hasClass('heart-active') ? '1' : '0';
-        $(this).closest('form').find('input[name=user_vote]').val(reactValue);
-    });
-});
-</script>";
+//         $('.heart-btn').click(function(){
+//             // Toggle the classes for the clicked heart
+//             $(this).toggleClass('heart-active');
+//             $(this).find('.text').toggleClass('heart-active');
+//             $(this).find('.numb').toggleClass('heart-active');
+//             $(this).find('.heart').toggleClass('heart-active');
+            
+//             // Update the hidden input value based on the toggle state
+//             var reactValue = $(this).hasClass('heart-active') ? " . $_SESSION['user_id'] . " : null;
+//             $(this).closest('form').find('input[name=user_vote]').val(reactValue);
+            
+//         });
+
+//         if (userExists) {
+//             $('.heart-btn').trigger('click');
+//         } else {
+//             // Simulate two clicks if the user does not exist
+//             $('.heart-btn').trigger('click').trigger('click');
+//         }
+//     });
+// </script>";
 ?>
+
+
 </body>
 
 </html>

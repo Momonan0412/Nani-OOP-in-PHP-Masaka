@@ -4,18 +4,25 @@
 	box-sizing: border-box;
 }
 
-body{
-	font-family: sans-serif;
-	min-height: 100vh;
-	color: #555;
-	background-color: #ffecfc;
-	font-size: 18px;
+body {
+	/* overflow: hidden; */
+    font-family: sans-serif;
+    min-height: 100vh;
+    color: #000000;
+    background-image: url('Train-Station.gif');
+    background-size: cover;
+    background-position: center;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
 }
+
+
 
 h1{
 	padding: 30px 20px;
 	text-align: center;
-	background-color: #1f1919;
+	background-color: rgb(212, 212, 212, .2);
 	color: #ffffff;
 	font-size: 80px;
 	text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);

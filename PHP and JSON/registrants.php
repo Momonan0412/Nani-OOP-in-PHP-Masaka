@@ -9,9 +9,10 @@
         header("location: login.php");
         exit();
     }
-    if(isset($_GET['submit'])){
+    if(isset($_POST['submit'])){
         // TO BE ADD THAT CAN UPDATE PENDING REGISTRANTS
-		header("location: delete.user.php");
+        $update->approved($_POST['status']);
+		header("location: registrants.php");
 		exit();
 	}
 ?>
@@ -96,44 +97,51 @@
             <th>Post ID</th>
             <th>Event Name</th>
             <th>Registrants</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <?php
+    <?php
         foreach ($jsonData as $e) {
             echo "<tr>";
             echo "<td>{$e['post_id']}</td>";
             echo "<td>{$e['subject']}</td>";
-            // Study!
-            // Registrants
             echo "<td>";
-            echo $e['registrants']['user_id'];
-            //var_dump($e);
-            // foreach ($e['registrants'] as $registrant) {
-            //     echo $registrant['user_id'];
-            // }
-            echo "</td>";
-            // Study!
-            // Votes
-            // echo "<td>";
-            // foreach ($e['votes'] as $vote) {
-            //     echo "{$vote['user_id']} - {$vote['vote']}<br>";
-            // }
-            // echo "</td>";
 
-            // Action
-            // echo $e['registrants']['status'];
-            echo "<td>
-                    <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
-                        <input type='hidden' name='status' value='{$e['registrants']['status']}'>
+            // Display user_id
+            echo $e['registrants']['user_id'];
+
+            echo "</td>";
+            echo "<td>";
+
+            // Apply styling based on the status
+            if ($e['registrants']['status'] === 'Approved!') {
+                echo "<div style='border: 2px; padding: 5px; font-weight: bold; box-shadow: 2px 2px 2px #888888;'>";
+                echo $e['registrants']['status'];
+                echo "</div>";
+            } else {
+                echo $e['registrants']['status'];
+            }
+            
+            
+
+            echo "</td>";
+            echo "<td>";
+
+            if ($e['registrants']['status'] === 'Pending') {
+                echo "<form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
+                        <input type='hidden' name='status' value='{$e['registrants']['user_id']}'>
                         <button type='submit' name='submit'>Approve</button>
-                    </form>
-                </td>";
+                    </form>";
+            }
+
+            echo "</td>";
 
             echo "</tr>";
         }
         ?>
+
     </tbody>
 </table>
 

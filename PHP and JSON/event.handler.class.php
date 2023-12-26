@@ -45,6 +45,7 @@
                     $this->insertEvent();
                 }
             }
+            
         }
 
         private function setEventState($registrants, $TheVotes){

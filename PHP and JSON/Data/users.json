@@ -6,5 +6,29 @@
         "password": "$2y$10$wkhUxrZfFMivLhRaJPmb0eDZDOeGN.QTMfSEKGNIqgH.DFf.2CNHS",
         "email": "avrilnigel.chua@cit.edu",
         "usertype": "admin"
+    },
+    {
+        "user_id": 2,
+        "name": "asd",
+        "username": "asd",
+        "password": "$2y$10$4Z2ik0nPWWxK9C6GAzTjhOYL4QqxAsAncOgrMqHsTlVb2GoAl9e0a",
+        "email": "asd@asd",
+        "usertype": "organizer"
+    },
+    {
+        "user_id": 3,
+        "name": "dsa",
+        "username": "dsa",
+        "password": "$2y$10$NThA\/zPLMwURc1SEmVDgOOUWfoA6eOH5PYKm4yfyXfTA2WTEIEl6C",
+        "email": "dsa@dsa",
+        "usertype": "user"
+    },
+    {
+        "user_id": 4,
+        "name": "qwe",
+        "username": "qwe",
+        "password": "$2y$10$baI7FD0EHvOJKaERJ3WrZOW.HPD4HXQl3p1y9vfqs2Xc3u7CPXCaG",
+        "email": "qwe@qwe",
+        "usertype": "user"
     }
 ]

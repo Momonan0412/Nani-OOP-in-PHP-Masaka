@@ -1,14 +1,2 @@
 [
-    {
-        "post_id": "1",
-        "subject": "Yoasobi Live Tour!",
-        "registrants": {
-            "user_id": "2",
-            "status": "Pending"
-        },
-        "votes": {
-            "user_id": "2",
-            "vote": ""
-        }
-    }
 ]

@@ -48,15 +48,6 @@
 				<label class="form-label">Password</label> <br>
 				<input class="form-control" type="password" name="password">
 			</div>
-			
-			<!-- <div class="mb-3">
-				<label class="form-label">User Type</label>
-				<select class="form-control" name="user_type">
-					<option value=""></option>
-					<option value="admin">Admin</option>
-					<option value="user">User</option>
-				</select>
-			</div> -->
 			<div class="mb-3">
 				<button style="background-color: black;" class="btn btn-outline-light me-2" type="submit" name="submit">Register</button>
 				<small id="emailHelpId" class="form-text text-muted">Already have an account? <a href="login.php">Login</a> </small>

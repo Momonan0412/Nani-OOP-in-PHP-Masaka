@@ -140,16 +140,16 @@
                 <input type='hidden' name='subject' value='$subject'>
                 <input type='hidden' name='userID' value='$userID'>
                 
-                // <!-- React 
-                // Button -->
-                // <button class='heart-btn' type='button'>
-                // <span class='content'>
-                // <span class='heart'></span>
-                // <span class='text'>Like</span>
-                // <span class='numb'></span>
-                // </span>
-                // </button> <br>
-                // <input type='hidden' name='user_vote' value=''>
+                <!-- React 
+                <button class='heart-btn' type='button'>
+                <span class='content'>
+                <span class='heart'></span>
+                <span class='text'>Like</span>
+                <span class='numb'></span>
+                </span>
+                </button> <br>
+                <input type='hidden' name='user_vote' value=''>
+                Button -->
                 <!-- Join Button -->
                 <button style='background-color: black;' class='btn btn-outline-light me-2' name='join' type='submit'>Join</button>
                 </td>

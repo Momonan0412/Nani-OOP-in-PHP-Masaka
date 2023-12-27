@@ -21,7 +21,7 @@
         "username": "dsa",
         "password": "$2y$10$NThA\/zPLMwURc1SEmVDgOOUWfoA6eOH5PYKm4yfyXfTA2WTEIEl6C",
         "email": "dsa@dsa",
-        "usertype": "user"
+        "usertype": "organizer"
     },
     {
         "user_id": 4,

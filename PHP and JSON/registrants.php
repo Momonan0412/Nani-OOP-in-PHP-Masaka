@@ -103,43 +103,58 @@
     </thead>
     <tbody>
     <?php
-        foreach ($jsonData as $e) {
-            echo "<tr>";
-            echo "<td>{$e['post_id']}</td>";
-            echo "<td>{$e['subject']}</td>";
-            echo "<td>";
+            foreach ($jsonData as $e) {
+                echo "<tr>";
+                echo "<td>{$e['post_id']}</td>";
+                echo "<td>{$e['subject']}</td>";
 
-            // Display user_id
-            echo $e['registrants']['user_id'];
+                echo "<td>";
+                // Display user_id for each registrant
+                foreach ($e['registrants'] as $registrant) {
+                    echo "<div style='border: 2px; padding: 5px; margin: 15px 0px; font-weight: bold; box-shadow: 2px 2px 2px #888888;'>";
+                    echo "{$registrant['user_id']}<br>";
+                    echo "</div>";
+                }
+                echo "</td>";
 
-            echo "</td>";
-            echo "<td>";
+                echo "<td>";
 
-            // Apply styling based on the status
-            if ($e['registrants']['status'] === 'Approved!') {
-                echo "<div style='border: 2px; padding: 5px; font-weight: bold; box-shadow: 2px 2px 2px #888888;'>";
-                echo $e['registrants']['status'];
-                echo "</div>";
-            } else {
-                echo $e['registrants']['status'];
+                // Apply styling based on the status for each registrant
+                foreach ($e['registrants'] as $registrant) {
+                    if ($registrant['status'] === 'Approved!') {
+                        echo "<div style='border: 2px; padding: 5px; font-weight: bold; box-shadow: 2px 2px 2px #888888;'>";
+                        echo $registrant['status'];
+                        echo "</div>";
+                    } else {
+                        echo $registrant['status'];
+                    }
+                    echo "<br>";
+                }
+
+                echo "</td>";
+                echo "<td>";
+
+                // Display the form for each registrant with 'Pending' status
+                foreach ($e['registrants'] as $registrant) {
+                    if ($registrant['status'] === 'Pending') {
+                        echo "<form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
+                                <input type='hidden' name='status' value='{$registrant['user_id']}'>
+                                <button type='submit' name='submit'>Approve</button>
+                            </form>";
+                    } else {
+                        // Handle the case when the registrant status is not 'Pending'
+                        echo "<div style='border: 2px; padding: 5px; font-weight: bold; box-shadow: 2px 2px 2px #888888;'>";
+                        echo "Already Approved"; // Example message, replace with your desired action or message
+                        echo "</div>";
+                    }
+                    echo "<br>";
+                }
+                
+
+                echo "</td>";
+
+                echo "</tr>";
             }
-            
-            
-
-            echo "</td>";
-            echo "<td>";
-
-            if ($e['registrants']['status'] === 'Pending') {
-                echo "<form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
-                        <input type='hidden' name='status' value='{$e['registrants']['user_id']}'>
-                        <button type='submit' name='submit'>Approve</button>
-                    </form>";
-            }
-
-            echo "</td>";
-
-            echo "</tr>";
-        }
         ?>
 
     </tbody>

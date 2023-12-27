@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "post_id": 1,
+        "user_id": 3,
+        "username": "dsa",
+        "subject": "Yoasobi Live Tour!",
+        "message": "Ikimasu!",
+        "image": "Yoasobi Live.webp"
+    },
+    {
+        "post_id": 2,
+        "user_id": 2,
+        "username": "asd",
+        "subject": "Japanese Festival!",
+        "message": "WOOHOOOO~~~!! Waku waku",
+        "image": "Festival.jpg"
+    }
+]

@@ -60,17 +60,38 @@ class HandleJsonFile{
         }
         file_put_contents($this->messagesStorage, json_encode($msgs, JSON_PRETTY_PRINT));
     }
+
+
+    /**
+     * Marks a registrant with the given user ID as 'Approved!' in the events data.
+     *
+     * @param string $user_id The user ID of the registrant to be approved.
+     * 
+     * Note: This method assumes that the events data has an array structure
+     * where 'registrants' is an array of registrants for each event.
+     */
     public function approved($user_id){
+        // Retrieve the current events data
         $events = $this->getEventsData();
+
+        // Iterate over each event
         foreach($events as &$e){
-            if(isset($e['registrants']['user_id']) && $e['registrants']['user_id'] === $user_id){
-                $e['registrants']['status'] = 'Approved!';
-                break;
+            // Iterate over each registrant within the event
+            foreach($e['registrants'] as &$registrant){
+                // Check if the user ID matches the target user ID
+                if(isset($registrant['user_id']) && $registrant['user_id'] === $user_id){
+                    // Mark the registrant as 'Approved!'
+                    $registrant['status'] = 'Approved!';
+                    // Exit the inner loop once the registrant is found and updated
+                    break;
+                }
             }
         }
+
+        // Save the updated events data back to the storage
         file_put_contents($this->eventsStorage, json_encode($events, JSON_PRETTY_PRINT));
     }
-    
+
     public function getUserStorage() {
         return $this->userStorage;
     }

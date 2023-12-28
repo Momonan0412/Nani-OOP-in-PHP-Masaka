@@ -17,11 +17,21 @@
         header("location: login.php");
         exit();
     }
-    if(isset($_GET['delete'])){
-		$update->deleteMessage($_GET['userId']);
-		header("location: account.php");
-		exit();
-	}
+    if (isset($_POST['delete'])) {
+        if (isset($_POST['userId'])) {
+            $userIdToDelete = $_POST['userId'];
+            
+            // Assuming $yourObject is an instance of the class where deleteMessage is defined
+            $update->deleteMessage($userIdToDelete);
+            
+            // You might want to redirect or reload the page after deleting
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            // Handle error - userId not provided
+        }
+    }
+    
     if(isset($_POST['join'])){
         // user_vote currently not handled
         $eventHandler = new EventHandler($_POST['postID'],$_POST['subject'],$_POST['userID'], $_POST['user_vote']);
@@ -63,7 +73,11 @@
 	<div class="nav-container">
 		<ul class="navigation">
 			<li><a href="account.php" class="nav-link" style="color: pink; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;">Home</a></li>
-			<li><a href="post.php" class="nav-link" style="color: whitesmoke; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;">Post An Event!</a></li>
+            <?php
+            if (isset($_SESSION['usertype']) && $_SESSION['usertype'] !== 'admin') {
+                echo "<li><a href='post.php' class='nav-link' style='color: whitesmoke; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;'>Post An Event!</a></li>";
+            }
+            ?>
             <?php
             if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'admin') {
                 echo "<li><a href='delete.user.php' class='nav-link' style='color: whitesmoke; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;'>Delete A User!</a></li>";
@@ -120,14 +134,15 @@
             if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'admin') {
                 $userId = $item['user_id']; // Assuming 'user_id' is the unique identifier
                 echo "
-                    <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='GET'>
+                    <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
                         <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
-                        <input type='hidden' name='userId' value='$userId'>
-                        <button style='background-color: black;' class='btn btn-outline-light me-2' name='delete' type='submit'>Delete</button>
+                            <input type='hidden' name='userId' value='$userId'>
+                            <button style='background-color: black;' class='btn btn-outline-light me-2' name='delete' type='submit'>Delete</button>
                         </td>
                     </form>
                 ";
             }
+            
             if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user' ||
                 isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer') {
                 $postID = $item['post_id'];

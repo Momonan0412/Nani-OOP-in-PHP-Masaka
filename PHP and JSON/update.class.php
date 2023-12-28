@@ -50,16 +50,17 @@ class HandleJsonFile{
         }
         file_put_contents($this->userStorage, json_encode($users, JSON_PRETTY_PRINT));
     }
-    public function deleteMessage($user_id){
+    public function deleteMessage($user_id) {
         $msgs = $this->getMessagesData();
         foreach ($msgs as $key => $msg) {
-            if($msg['user_id'] == $user_id){
+            if ($msg['user_id'] == $user_id) {
                 unset($msgs[$key]);
                 break;
             }
         }
-        file_put_contents($this->messagesStorage, json_encode($msgs, JSON_PRETTY_PRINT));
+        file_put_contents($this->messagesStorage, json_encode(array_values($msgs), JSON_PRETTY_PRINT));
     }
+    
 
 
     /**

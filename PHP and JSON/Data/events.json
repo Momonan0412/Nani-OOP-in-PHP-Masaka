@@ -30,12 +30,20 @@
             {
                 "user_id": "2",
                 "status": "Pending"
+            },
+            {
+                "user_id": "1",
+                "status": "Pending"
             }
         ],
         "votes": [
             {
                 "user_id": "2",
                 "vote": ""
+            },
+            {
+                "user_id": "1",
+                "vote": null
             }
         ]
     }

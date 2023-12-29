@@ -2,6 +2,7 @@
 	require("logout.class.php");
 	require("update.class.php");
 	require("event.handler.class.php");
+	require("review.class.php");
     $update = new HandleJsonFile();
     $jsonData = $update->getMessagesData();
 ?>
@@ -31,10 +32,14 @@
             // Handle error - userId not provided
         }
     }
-    
     if(isset($_POST['join'])){
         // user_vote currently not handled
         $eventHandler = new EventHandler($_POST['postID'],$_POST['subject'],$_POST['userID'], $_POST['user_vote']);
+        header("location: account.php");
+        exit();
+    }
+    if(isset($_POST['review'])){
+        $review = new PostReview($_POST['reviewPostID'],$_POST['reviewPost']);
         header("location: account.php");
         exit();
     }
@@ -60,7 +65,16 @@
 	<div class="container">
     <form id="logout-form" method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8'); ?>">
     <label style="text-align: center;" for="">
-        <h2 style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;" >WELCOME!</h2>
+    <div style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 14px;" >
+    <?php
+        if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user') 
+            echo"<h2>WELCOME USER!</h2>";
+        else if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer') 
+            echo"<h2>WELCOME ORGANIZER!</h2>";
+        else
+            echo"<h2>WELCOME ADMIN!</h2>";
+    ?>
+    </div>
         <h4>
             <span style="color: pink; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; font-size: 1.5em;">
                 <?php echo $_SESSION['user']; ?>!
@@ -108,6 +122,7 @@
                 isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer') {
                 echo '<th>Action</th>';
             }
+            echo '<th>Reviews</th>';
             ?>
         </tr>
         
@@ -138,74 +153,37 @@
                         <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
                             <input type='hidden' name='userId' value='$userId'>
                             <button style='background-color: black;' class='btn btn-outline-light me-2' name='delete' type='submit'>Delete</button>
-                        </td>
-                    </form>
-                ";
-            }
-            
-            if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user' ||
+                            </td>
+                            </form>";
+            } else if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'user' ||
                 isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'organizer') {
                 $postID = $item['post_id'];
                 $subject = $item['subject'];
                 $userID = $_SESSION['user_id'];
                 echo "
                 <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
-                <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
-                <input type='hidden' name='postID' value='$postID'>
-                <input type='hidden' name='subject' value='$subject'>
-                <input type='hidden' name='userID' value='$userID'>
-                
-                <!-- React 
-                <button class='heart-btn' type='button'>
-                <span class='content'>
-                <span class='heart'></span>
-                <span class='text'>Like</span>
-                <span class='numb'></span>
-                </span>
-                </button> <br>
-                <input type='hidden' name='user_vote' value=''>
-                Button -->
+                    <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);'>
+                        <input type='hidden' name='postID' value='$postID'>
+                        <input type='hidden' name='subject' value='$subject'>
+                        <input type='hidden' name='userID' value='$userID'>
+                    </td>
+                </form>
                 <!-- Join Button -->
-                <button style='background-color: black;' class='btn btn-outline-light me-2' name='join' type='submit'>Join</button>
-                </td>
-                </form>";
+                <button style='background-color: black;' class='btn btn-outline-light me-2' name='join' type='submit'>Join</button>";
             }
+            echo "
+            <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
+                <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); text-align: center;'>
+                    <input type='hidden' name='reviewPostID' value='{$item['post_id']}'>
+                    <textarea class='form-control' name='reviewPost' placeholder='Enter your review here........' style='width: 80%; margin: 0 auto; text-align: center;' rows='10'></textarea>
+                    <button style='background-color: black;' class='btn btn-outline-light me-2' name='review' type='submit'>Submit</button>
+                </td>
+            </form>";            
             echo "</tr>";
         }
         ?>
     </tbody>
 </table>
-
-<?php
-// echo "
-// <script>
-//     $(document).ready(function(){
-//         // For the 'React' button
-//         var postData = " . json_encode($update->getVotesData()) . ";
-//         var userExists = postData.user_ids.includes(" . $_SESSION['user_id'] . ");
-        
-//         $('.heart-btn').click(function(){
-//             // Toggle the classes for the clicked heart
-//             $(this).toggleClass('heart-active');
-//             $(this).find('.text').toggleClass('heart-active');
-//             $(this).find('.numb').toggleClass('heart-active');
-//             $(this).find('.heart').toggleClass('heart-active');
-            
-//             // Update the hidden input value based on the toggle state
-//             var reactValue = $(this).hasClass('heart-active') ? " . $_SESSION['user_id'] . " : null;
-//             $(this).closest('form').find('input[name=user_vote]').val(reactValue);
-            
-//         });
-
-//         if (userExists) {
-//             $('.heart-btn').trigger('click');
-//         } else {
-//             // Simulate two clicks if the user does not exist
-//             $('.heart-btn').trigger('click').trigger('click');
-//         }
-//     });
-// </script>";
-?>
 
 
 </body>

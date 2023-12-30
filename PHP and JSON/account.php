@@ -43,6 +43,12 @@
         header("location: account.php");
         exit();
     }
+    if(isset($_POST['show'])){
+        $_SESSION['postID'] = $_POST['reviewPostID'];
+        $_SESSION['subject'] = $_POST['subject'];
+        header("location: review.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -166,17 +172,19 @@
                         <input type='hidden' name='postID' value='$postID'>
                         <input type='hidden' name='subject' value='$subject'>
                         <input type='hidden' name='userID' value='$userID'>
+                        <!-- Join Button -->
+                        <button style='background-color: black;' class='btn btn-outline-light me-2' name='join' type='submit'>Join</button>
                     </td>
-                </form>
-                <!-- Join Button -->
-                <button style='background-color: black;' class='btn btn-outline-light me-2' name='join' type='submit'>Join</button>";
+                </form>";
             }
             echo "
             <form action='" . htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, 'UTF-8') . "' method='POST'>
                 <td style='width: 300px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); font-weight: bold; font-size: 25px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); text-align: center;'>
                     <input type='hidden' name='reviewPostID' value='{$item['post_id']}'>
                     <textarea class='form-control' name='reviewPost' placeholder='Enter your review here........' style='width: 80%; margin: 0 auto; text-align: center;' rows='10'></textarea>
-                    <button style='background-color: black;' class='btn btn-outline-light me-2' name='review' type='submit'>Submit</button>
+                    <button style='background-color: black;' class='btn btn-outline-light me-2' name='review' type='submit'>Submit</button> <br>
+                    <input type='hidden' name='subject' value='{$item['subject']}'>
+                    <button style='background-color: black;' class='btn btn-outline-light me-2' name='show' type='submit'>View</button>
                 </td>
             </form>";            
             echo "</tr>";

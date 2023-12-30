@@ -8,7 +8,7 @@ class PostReview {
     private $success;
     private $error;
 
-    public function __construct($postID, $review) {
+    public function __construct($postID = null, $review = null) {
         $this->postID = $postID;
         $this->review = $review;
 
@@ -44,6 +44,13 @@ class PostReview {
         } else {
             $this->error = "Something went wrong while updating the reviews, please try again";
         }
+    }
+    
+    public function getEventsData(){
+        if(file_exists($this->reviewsStorage)){
+            $this->reviewsStorage = json_decode(file_get_contents($this->reviewsStorage), true);
+        }
+        return $this->reviewsStorage;
     }
 }
 ?>
